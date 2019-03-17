@@ -1,21 +1,56 @@
 import React from "react"
-import { Link } from "gatsby"
 
 import Layout from "../components/layout"
-import Image from "../components/image"
-import SEO from "../components/seo"
+// import Image from "../components/image"
+// import SEO from "../components/seo"
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
-)
+import { Link, graphql } from "gatsby"
+
+//  Function to create a list of <h1> elements with Post title
+
+function getPosts(data) {
+  let posts = []
+  let postsList = data.allMarkdownRemark.edges
+  postsList.forEach((element, key) => {
+    let date = element.node.frontmatter.date
+    let slug = element.node.frontmatter.slug
+    let title = element.node.frontmatter.slug
+    posts.push(
+      <li key={key}>
+        <Link to={`/${slug}`}>
+          <h1>{title}</h1>
+        </Link>
+
+        <h2>{date}</h2>
+      </li>
+    )
+  })
+
+  return posts
+}
+
+// =========== This is a stateless React component ===============
+// The data passed into the components is from the result after executing
+// the GraphQL Query below it.
+const IndexPage = ({ data }) => <Layout>{getPosts(data)}</Layout>
 
 export default IndexPage
+
+// =========== This is the GraphQL query =======================
+// The data obtained the from the below GraphQL query will be
+// passed into the React component above
+export const postsQuery = graphql`
+  query postsQuery {
+    allMarkdownRemark(sort: { fields: [frontmatter___date], order: ASC }) {
+      edges {
+        node {
+          frontmatter {
+            slug
+            title
+            date(formatString: "DD MMMM, YY")
+          }
+        }
+      }
+    }
+  }
+`
