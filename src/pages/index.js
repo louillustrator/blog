@@ -1,5 +1,4 @@
 import React from "react"
-
 import Layout from "../components/layout"
 // import Image from "../components/image"
 // import SEO from "../components/seo"
@@ -16,9 +15,9 @@ function getPosts(data) {
     let slug = element.node.frontmatter.slug
     let title = element.node.frontmatter.slug
     posts.push(
-      <li key={key}>
+      <li className="blog-list" key={key}>
         <Link to={`/${slug}`}>
-          <h1>{title}</h1>
+          <h1 className="blog-title">{title}</h1>
         </Link>
 
         <h2>{date}</h2>

@@ -8,12 +8,14 @@ function BlogPost(props) {
   const { title } = post.frontmatter
 
   return (
-    <Layout>
-      <div>
-        <h1>{title}</h1>
-        <div dangerouslySetInnerHTML={{ __html: post.html }} />
-      </div>
-    </Layout>
+    <style>
+      <Layout>
+        <div>
+          <h1>{title}</h1>
+          <div class="post" dangerouslySetInnerHTML={{ __html: post.html }} />
+        </div>
+      </Layout>
+    </style>
   )
 }
 export default BlogPost
