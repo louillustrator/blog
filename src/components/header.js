@@ -19,7 +19,7 @@ const Headline = styled.div`
 
 const StyledLink = styled(Link)`
   color: white;
-  textdecoration: none;
+  text-decoration: none;
 `
 
 const Header = ({ siteTitle }) => (

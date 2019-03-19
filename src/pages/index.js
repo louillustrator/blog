@@ -1,11 +1,25 @@
 import React from "react"
 import Layout from "../components/layout"
+import styled from "styled-components"
 // import Image from "../components/image"
 // import SEO from "../components/seo"
 
 import { Link, graphql } from "gatsby"
 
-//  Function to create a list of <h1> elements with Post title
+const BlogList = styled.li`
+  text-align: centre;
+`
+
+const BlogTitle = styled.h2`
+  color: blue;
+  display: inline-block;
+`
+
+const Blogdate = styled.h3`
+  display: inline-block;
+`
+
+//  Function to create a list of <h2> elements with Post title
 
 function getPosts(data) {
   let posts = []
@@ -15,13 +29,13 @@ function getPosts(data) {
     let slug = element.node.frontmatter.slug
     let title = element.node.frontmatter.slug
     posts.push(
-      <li className="blog-list" key={key}>
+      <BlogList key={key}>
         <Link to={`/${slug}`}>
-          <h1 className="blog-title">{title}</h1>
+          <BlogTitle>{title}</BlogTitle>
         </Link>
 
-        <h2>{date}</h2>
-      </li>
+        <Blogdate>{date}</Blogdate>
+      </BlogList>
     )
   })
 

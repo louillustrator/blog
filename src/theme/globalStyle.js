@@ -11,7 +11,7 @@ export const GlobalStyle = createGlobalStyle`
   a {
     text-decoration: none;
   }
-  ul {
+  li {
     margin: 0 auto;
     list-style-type: none;
     text-decoration: none;
