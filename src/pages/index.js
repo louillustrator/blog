@@ -10,13 +10,26 @@ const BlogList = styled.li`
   text-align: centre;
 `
 
-const BlogTitle = styled.h2`
+const BlogTitle = styled.h4`
   color: blue;
   display: inline-block;
+  color: #eb9486;
+  font-size: 21px;
 `
 
 const Blogdate = styled.h3`
   display: inline-block;
+  color: #56667a;
+  font-size: 12px;
+  margin-left: 10px;
+  /* padding-left: 38px; */
+`
+
+const BlogSectionHeader = styled.h4`
+  font-size: 26px;
+  color: #56667a;
+  margin-bottom: 0px;
+  margin-top: 5px;
 `
 
 //  Function to create a list of <h2> elements with Post title
@@ -34,7 +47,7 @@ function getPosts(data) {
           <BlogTitle>{title}</BlogTitle>
         </Link>
 
-        <Blogdate>{date}</Blogdate>
+        <Blogdate>{`(${date})`}</Blogdate>
       </BlogList>
     )
   })
@@ -45,7 +58,12 @@ function getPosts(data) {
 // =========== This is a stateless React component ===============
 // The data passed into the components is from the result after executing
 // the GraphQL Query below it.
-const IndexPage = ({ data }) => <Layout>{getPosts(data)}</Layout>
+const IndexPage = ({ data }) => (
+  <Layout>
+    <BlogSectionHeader>Posts</BlogSectionHeader>
+    {getPosts(data)}
+  </Layout>
+)
 
 export default IndexPage
 
